@@ -33,4 +33,8 @@ public class JournalService {
 //        Integer key = Integer.parseInt(id);
         journalRepository.delete(new Journal(key));
     }
+    
+    public Journal findById(Integer key) {
+        return journalRepository.findById(key).get();
+    }
 }

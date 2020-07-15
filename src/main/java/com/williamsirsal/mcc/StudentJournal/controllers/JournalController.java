@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 /**
@@ -33,6 +34,20 @@ public class JournalController {
     @PostMapping("/save")
     public String save(@Valid Journal journal) {
         journalService.save(journal);
+        return "redirect:/";
+    }
+    
+    @GetMapping("{id}")
+    public String getById(Model model, @PathVariable("id") String id) {
+        Integer key = Integer.parseInt(id);
+        model.addAttribute("journal", journalService.findById(key));
+        model.addAttribute("journals", journalService.getAll());
+        return "index";
+    }
+    
+    @GetMapping("/delete/{id}")
+    public String delete(Model model, @PathVariable("id") String id) {
+        journalService.delete(Integer.parseInt(id));
         return "redirect:/";
     }
 }
