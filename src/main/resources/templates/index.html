@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Student Journal</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div align="center">
+            <h1>Journals!</h1>
+            <br>
+            <form th:action="@{/save}" th:object="${journal}" method="POST">
+                <label>ID</label>
+                <input type="text" id="textid" th:field="*{id}">
+                <br><br>
+                <label>Judul</label>
+                <input type="text" id="textJudul" class="form-control" th:field="*{judul}"/>
+                <br><br>
+                <label>Isi</label>
+                <input type="text" id="textJudul" class="form-control" th:field="*{isi}"/>
+                <br><br>
+                <input type="submit" value="Save"/>
+            </form>
+            <table>
+                <tr>
+                    <th>ID</th>
+                    <th>Judul</th>
+                    <th>Isi</th>
+                    <th>Action</th>
+                </tr>
+                <tr th:each="as:${journals}">
+                    <td th:text="${as.id}"></td>
+                    <td th:text="${as.judul}"></td>
+                    <td th:text="${as.isi}"></td>
+                    <td>
+                        <a >update</a>
+                        <a >delete</a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </body>
+</html>
